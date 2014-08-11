@@ -206,4 +206,8 @@ public class SaveLoader {
 	public String getGeneratorOptions() {
 		return generatorOptions;
 	}
+
+	public File getFile() {
+		return file;
+	}
 }

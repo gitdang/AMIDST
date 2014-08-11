@@ -64,6 +64,7 @@ public class AmidstMenu extends JMenuBar {
 				setMnemonic(KeyEvent.VK_N);
 				add(new SeedMenuItem());
 				add(new FileMenuItem());
+				add(new RefreshFileMenuItem());
 				add(new RandomSeedMenuItem());
 				//add(new JMenuItem("From Server"));
 			}});
@@ -227,6 +228,7 @@ public class AmidstMenu extends JMenuBar {
 		private class FileMenuItem extends JMenuItem {
 			private FileMenuItem() {
 				super("From file or folder");
+				setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
 				addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
@@ -256,6 +258,26 @@ public class AmidstMenu extends JMenuBar {
 							window.clearProject();
 							window.setProject(new Project(s));
 						}
+					}
+				});
+			}
+		}
+
+		private class RefreshFileMenuItem extends JMenuItem {
+			private RefreshFileMenuItem() {
+				super("Refresh from file or folder");
+				setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK|InputEvent.SHIFT_DOWN_MASK));
+				addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						if (window.curProject == null || window.curProject.save == null) {
+							Log.i("No previously-loaded file.");
+							return; // no previously loaded file
+						}
+						File f = window.curProject.save.getFile();
+						SaveLoader s = new SaveLoader(f);
+						window.clearProject();
+						window.setProject(new Project(s));
 					}
 				});
 			}
