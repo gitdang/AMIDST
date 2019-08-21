@@ -3,6 +3,10 @@ AMIDST
 
 Advanced Minecraft Interface and Data/Structure Tracking
 
+Note
+----
+This is a fork, not my (gotDang) original work.
+
 License and warranty
 --------------------
 
